@@ -18,3 +18,22 @@ console.log(Math.floor(n2)) // 18
 console.log(Math.floor(n3)) // 17
 
 console.log(Math.abs(n4)) // 250 (it is going to absolute value of the variable , means positiive value)
+
+console.log(Math.pow(2,3)) // 8
+console.log(Math.sqrt(64)) // 8
+
+console.log(Math.random())
+
+//Method overloading
+console.log(Math.min(12,34,56,78,90))
+console.log(Math.min(12,34))
+
+console.log(Math.max(12,34,56))
+console.log(Math.max(45,34))
+
+/*
+To find out the max or min value on array we have to use spread operator(...)
+Whenever we use the spread operator on array , it is going to extract each value from the array and pass it as an argument
+*/
+const numbers = [1,2,4,5,6,7,8]
+console.log(Math.max(...numbers))
