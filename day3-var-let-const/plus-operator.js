@@ -9,4 +9,6 @@ console.log(10 + 5 + '5') // '155'
 console.log('5' + 10 + 5) // '5105'
 console.log(10 + '5' + 10 + 5) // '105105'
 
-console.log('5' + (10 + 5)) //515
+console.log('5' + (10 + 5)) //'515'
+
+console.log('10' + 10 ) // '1010'
