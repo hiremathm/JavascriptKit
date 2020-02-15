@@ -41,3 +41,8 @@ console.log(text.includes('t')) //true
 
 //Repeat (String multiplication)
 console.log("*".repeat(4))
+
+//Split 
+const emails = "1@gmail.com, 2@gmail.com, 3@gmail.com"
+
+console.log(emails.split(", "))
