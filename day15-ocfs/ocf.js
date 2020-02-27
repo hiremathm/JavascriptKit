@@ -21,10 +21,22 @@ function Player(){
 // const p1 = new Player()
 // console.log(typeof p1)
 
-// const p2 = new Player()
+const p2 = new Player()
 // console.log(typeof p2)
 
 // console.log(p1 == p2)
 
 console.log(Player()) // global object
-console.log(new Player()) // local object
+// console.log(new Player()) // local object
+
+//in node main object is global
+//in browser main object is window
+
+//in node we have access to process object(another object)
+//in browser we have access to the document
+
+// node:global::browser:window
+// node:process::browser:document
+
+console.log(p2.firstname)// if we access a property which is not defined inside the constructor function then it will be undefined
+
