@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>My Todo List</title>
+    </head>
+    <body>
+        <h2>My Todo List</h2>
+        <button id = "add_task">
+            Add Task
+				</button>
+				<button id = "reset_task">Reset Task</button>
+        <ul id='task_list'>
+
+        </ul>
+        <script>
+            let task = document.getElementById('add_task')
+            let task_list = document.getElementById('task_list')
+            let reset_task = document.getElementById('reset_task')
+						let tasks = []
+            task.addEventListener('click', function(){
+                let name = prompt("Enter The Task")
+                if(name){
+                    tasks.push(name)
+                    listTask(name)
+                }
+							// 	const li = document.createElement('li')
+              // li.innerHTML = name
+              // task_list.appendChild(li)
+                console.log("Tasks :: ", tasks)
+            })
+
+            function listTask(task){
+              const li = document.createElement('li')
+              li.innerHTML = task
+              task_list.appendChild(li)
+            }
+
+						reset_task.addEventListener('click', function(){
+							const pr = prompt("are you sure?")
+							if(pr){
+								task_list.innerHTML = ''
+							}
+						})
+        </script>
+    </body>
+</html>
+
+<!-- 
+    Falsy Values 
+    1) null 2) zero 3) empty string 4) undefined 5) NaN
+    Truthy Values
+    Apart from falsy values anything is truty values
+    1) number 2) empty array ) empty object 3) string 4) boolean
+    
+    const values = [10,1,0,false,true,'blr','',[],{},undefined,null,NaN,[10],{name: 'shiva'}]
+
+    const truthy = [], falsy = []
+
+    values.forEach(function(value){
+        if(value){
+            truthy.push(value)
+        }else{
+            falsy.push(value)
+        }
+    })
+ -->
