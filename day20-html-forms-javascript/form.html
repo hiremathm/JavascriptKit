@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html>
+    <head>
+      <title>
+        HTML Form
+      </title>
+    </head>
+    <body>
+      <form action="#" id="myForm">
+        <input type="text" id = "name">
+        <input type="submit">
+      </form>      
+      Character Count ::
+      <span id = "count"></span><br/>
+      Characters :: 
+      <span id = "characters"></span><br/>
+      Vowels ::
+      <span id = "vowels"></span>
+
+      <div>
+        Vowel occurance ::
+
+        <table border="1px">
+          <thead>
+            <tr>
+              <th>a</th>
+              <th>e</th>
+              <th>i</th>
+              <th>o</th>
+              <th>u</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td id = "a">-</td>
+              <td id = "e">-</td>
+              <td id = "i">-</td>
+              <td id = "o">-</td>
+              <td id = "u">-</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+      <script>
+        const formHandle = document.getElementById('myForm')
+        const nameHandle = document.getElementById('name')
+        const count = document.getElementById('count')
+        const characters = document.getElementById('characters')
+        const vowels = document.getElementById('vowels')
+        
+        const aHandle = document.getElementById('a')
+        const eHandle = document.getElementById('e')
+        const iHandle = document.getElementById('i')
+        const oHandle = document.getElementById('o')
+        const uHandle = document.getElementById('u')
+
+        formHandle.addEventListener('submit', function(e){
+          e.preventDefault();
+          console.log("Form Submitted")
+         
+        })
+        nameHandle.addEventListener('keyup', function(){
+          count.innerHTML = nameHandle.value.length
+          let output = ""
+          let totalVowelCount = 0
+          let vowelCount = {}
+          vowelCount['a'] = 0
+          vowelCount['e'] = 0
+          vowelCount['i'] = 0
+          vowelCount['o'] = 0
+          vowelCount['u'] = 0
+
+          console.log("output",output)
+          let name = nameHandle.value
+          for(let i = name.length -1 ; i >= 0; i--){
+            if(name[i] == 'a'){
+              totalVowelCount += 1
+              vowelCount['a'] += 1
+            }else if(name[i] == 'e'){
+              totalVowelCount += 1
+              vowelCount['e'] += 1
+            }else if(name[i] == 'i'){
+              totalVowelCount += 1
+              vowelCount['i'] += 1
+            }else if(name[i] == 'o'){
+              totalVowelCount += 1
+              vowelCount['o'] += 1
+            }else if(name[i] == 'u'){
+              totalVowelCount += 1 
+              vowelCount['u'] += 1
+            } 
+            output += name[i]
+          }
+          
+          characters.innerHTML = output
+          vowels.innerHTML = totalVowelCount
+          
+          a.innerHTML = vowelCount['a']
+          e.innerHTML = vowelCount['e']
+          i.innerHTML = vowelCount['i']
+          o.innerHTML = vowelCount['o']
+          u.innerHTML = vowelCount['u']
+
+        })
+      </script>
+    </body>
+</html>
