@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html>
+    <thead>
+        <title>
+            Gender API
+        </title>
+    </thead>
+    <tbody>
+        <label>
+          Name :   
+          <input type="text" id = "name" name = "gender" />
+        </label>
+        <div id = "gender">
+
+        </div>
+        <script>
+            const nameHandle = document.getElementById('name')
+            const api_key = "AtuqEuWPyABdWYorNr"
+            const genderHandle = document.getElementById('gender')
+            
+            nameHandle.addEventListener('blur', function(){
+              if(nameHandle.value != ""){
+              const url = `https://gender-api.com/get?name=${nameHandle.value}&key=${api_key}`
+              nameHandle.value = ""
+              const xhr = new XMLHttpRequest()
+              xhr.open('GET', url)
+              xhr.send()
+              xhr.onload = function(){
+                const gender = "The gender is :: " + JSON.parse(xhr.responseText)["gender"]
+                genderHandle.innerHTML = gender
+              }}
+            })
+            
+        </script>
+    </tbody>
+</html>
