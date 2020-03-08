@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html>
+    <thead>
+        <title>
+            Ajax Call using axios 
+        </title>
+    </thead>
+
+    <tbody>
+        <h3>Listing Of Users</h3>
+        <ul id = "list">
+
+        </ul>
+        <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+        <script>
+            let users = []
+            const listHandle = document.getElementById('list')
+            const url = "https://jsonplaceholder.typicode.com/users"
+/*
+    axios is a promise based http client for both browser and server
+    - Eventual completion of asynchronous operation 
+    - Make XMLHttpRequests from the browser
+    - Make http requests from node.js
+    - Supports the Promise API
+    - Intercept request and response
+    - Transform request and response data
+    - Cancel requests
+    - Automatic transforms for JSON data
+    - Client side support for protecting against XSRF
+*/
+            axios.get(url)
+              .then(function(response){
+                users = response.data
+                users.forEach(function(user){
+                  let li = document.createElement('li')
+                  li.textContent = user.name
+                  listHandle.appendChild(li)
+               })
+              })
+              .catch(function(error){
+                console.log(error)
+              })
+              .finally(function(){
+                // always executed
+                console.log("the sum is : ", 3+5)
+              })
+/*
+  const xhr = new XMLHttpRequest()
+  xhr.open('GET', url)
+  xhr.send()
+  xhr.onload = function(){
+      users = JSON.parse(xhr.responseText)
+      console.table(users) 
+      users.forEach(function(user){
+          let li = document.createElement('li')
+          li.textContent = user.name
+          listHandle.appendChild(li)
+      })
+  }
+*/
+        </script>
+    </tbody>
+</html>

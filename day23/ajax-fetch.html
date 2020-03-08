@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html>
+    <thead>
+        <title>
+            Ajax Call using fetch 
+        </title>
+    </thead>
+
+    <tbody>
+        <h3>Listing Of Users</h3>
+        <ul id = "list">
+
+        </ul>
+        <script>
+            let users = []
+            const listHandle = document.getElementById('list')
+            const url = "https://jsonplaceholder.typicode.com/users"
+/*
+  -> fetch is one of function (object) which is built at browser level for communication with remote server
+  -> fetch returns the promise 
+  -> a promise object can be of three state 
+      - pending
+      - resolved
+      - rejected 
+  -> what are the asynchronous operations in javascript
+      - network operations
+      - database operations
+*/
+            fetch(url)
+                .then(function(response){
+                    return response.json()
+                })
+                .then(function(data){
+                    data.forEach(function(user){
+                    let li = document.createElement('li')
+                    li.textContent = user.name
+                    listHandle.appendChild(li)
+                  })
+                })
+                .catch(function(error){
+                  console.log(error.message)
+                })
+/*
+  const xhr = new XMLHttpRequest()
+  xhr.open('GET', url)
+  xhr.send()
+  xhr.onload = function(){
+      users = JSON.parse(xhr.responseText)
+      console.table(users) 
+      users.forEach(function(user){
+          let li = document.createElement('li')
+          li.textContent = user.name
+          listHandle.appendChild(li)
+      })
+  }
+*/
+        </script>
+    </tbody>
+</html>
