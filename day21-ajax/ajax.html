@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html>
+    <thead>
+        <title>
+            Ajax Call
+        </title>
+    </thead>
+
+    <tbody>
+        <h3>Listing Of Users</h3>
+        <ul id = "list">
+
+        </ul>
+        <script>
+            let users = []
+            const listHandle = document.getElementById('list')
+            const url = "https://jsonplaceholder.typicode.com/users"
+            const xhr = new XMLHttpRequest()
+            xhr.open('GET', url)
+            xhr.send()
+            xhr.onload = function(){
+                users = JSON.parse(xhr.responseText)
+                console.table(users) 
+                users.forEach(function(user){
+                    let li = document.createElement('li')
+                    li.textContent = user.name
+                    listHandle.appendChild(li)
+                })
+            }
+
+            // xhr.close()
+        </script>
+    </tbody>
+</html>

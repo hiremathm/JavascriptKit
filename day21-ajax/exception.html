@@ -1,0 +1,70 @@
+<!-- Ajax helps us to communicate with remote server doing write / read operation without page reloading. -->
+
+<!DOCTYPE html>
+<html>
+    <head>
+
+    </head>
+
+    <body>
+        <div id = "demo">
+        </div>
+        <div id="numPricision"></div>
+        <div id = "reference"></div>
+        <div id = "syntax"></div>
+        <div id = "type"></div>
+        <div id = "uri"></div>
+        <script>
+            let demoHandle = document.getElementById('demo');
+            let pricisionHandle = document.getElementById('numPricision')
+            let referenceHandle = document.getElementById('reference')
+            let syntaxHandle = document.getElementById('syntax')
+            let typeHandle = document.getElementById('type')
+            let uriHandle = document.getElementById('uri')
+            let a = 10;
+            try {
+                if(a < 15) throw "a is less than 15";
+                
+            }
+            catch(err){
+                demoHandle.innerHTML = err;        
+            }
+            finally{
+                demoHandle.innerHTML = "the a is less than 15"
+            }
+               
+            try{
+                a.toPrecision(104)
+            }catch(err){
+                pricisionHandle.innerHTML = err.message;
+            }
+
+            try{
+                a = b + 1
+            }catch(err){
+                referenceHandle.innerHTML = err.message;
+            }
+
+            try {
+                eval("alert('sfsdfdsf)")
+            }catch(err){
+                syntaxHandle.innerHTML = err.message;
+            }
+
+            var num = 1;
+            try {
+            num.toUpperCase();   // You cannot convert a number to upper case
+            }
+            catch(err) {
+                typeHandle.innerHTML = err.name;
+            }
+
+            try {
+               decodeURI("%%%");   // You cannot URI decode percent signs
+            }
+            catch(err) {
+                uriHandle.innerHTML = err.name;
+            }
+        </script>
+    </body>
+</html>
