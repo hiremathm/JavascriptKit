@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html>
+    <head>
+
+    </head>
+    <body>
+        <div id = "root">
+
+        </div>
+        <script src="/home/s/personal_work/Javascript/Activities/js/react.development.js"></script>
+        <script src="/home/s/personal_work/Javascript/Activities/js/react-dom.development.js"></script>
+        <script src="/home/s/personal_work/Javascript/Activities/js/babel.js"></script>
+
+        <script type="text/babel">
+            let rootHandle = document.getElementById('root')
+            
+            class Counter extends React.Component{
+                constructor(){
+                    super()
+                    this.state = {
+                        count: 0
+                    }
+                }
+                up = () =>{
+                    this.setState((prevState) => {
+                        return {
+                            count: prevState.count + 1
+                        }
+                    })
+                }
+
+                down = () =>{
+                    this.setState((prevState) => {
+                        return {
+                            count: prevState.count - 1
+                        }
+                    })
+                }
+                render() {
+                    return (
+                        <div>
+                            <h2>
+                                Count : {this.state.count}
+                            </h2>
+
+                            <button onClick = {this.up}>UP</button>
+                            <button onClick = {this.down}>DOWN</button>
+                        </div>
+                    )
+                }   
+            }
+            const elements = (
+              <div>
+                <Counter/>
+                <Counter/>
+                <Counter/>
+                <Counter/>
+              </div>
+              
+            )
+            ReactDOM.render(elements, rootHandle)
+        </script>
+    </body>
+</html>
