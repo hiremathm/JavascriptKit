@@ -1,0 +1,22 @@
+<!DOCTYPE  html>
+<html>
+    <head>
+
+    </head>
+
+    <body>
+        <div id = "root">
+            
+        </div>
+
+        <script src="/home/s/personal_work/Javascript/Activities/js/react.development.js"></script>
+        <script src="/home/s/personal_work/Javascript/Activities/js/react-dom.development.js"></script>
+        <script src="/home/s/personal_work/Javascript/Activities/js/babel.js"></script>
+        <script type="text/babel">
+            let rootHandle = document.getElementById('root')
+            // ReactDOM.render(<h1>Hello, world!</h1>,rootHandle);
+            const element = React.createElement('h1',{},'Hello World')
+            ReactDOM.render(element, rootHandle)
+        </script>
+    </body>
+</html>

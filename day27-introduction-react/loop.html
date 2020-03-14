@@ -1,0 +1,50 @@
+
+<!DOCTYPE  html>
+<html>
+    <head>
+
+    </head>
+
+    <body>
+        <div id = "root">
+            
+        </div>
+
+        <script src="/home/s/personal_work/Javascript/Activities/js/react.development.js"></script>
+        <script src="/home/s/personal_work/Javascript/Activities/js/react-dom.development.js"></script>
+        <script src="/home/s/personal_work/Javascript/Activities/js/babel.js"></script>
+        <script type="text/babel">
+            let rootHandle = document.getElementById('root')
+            const urls = [
+                {id: 1, name: "google", url: "http://www.google.com"},
+                {id: 2, name: "facebook", url: "http://www.facebook.com"}
+            ]
+            const element = (
+                <table>
+                    <thead>
+                        <tr>
+                            <th>#</th>
+                            <th>Website</th>
+                            <th>URL</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        
+                        {
+                            urls.map(function(url){
+                                return (
+                                    <tr key = {url.id}>
+                                        <td>{url.id}</td>     
+                                        <td>{url.name}</td>
+                                        <td>{url.url}</td>
+                                    </tr>
+                                )
+                            })
+                        }
+                    </tbody>
+                </table>
+            )
+            ReactDOM.render(element, rootHandle)
+        </script>
+    </body>
+</html>
