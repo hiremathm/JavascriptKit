@@ -1,0 +1,208 @@
+
+<!DOCTYPE  html>
+<html>
+    <head>
+
+    </head>
+
+    <body>
+        <div id = "root">
+            
+        </div>
+
+
+        <script src="/home/s/personal_work/Javascript/Activities/js/react.development.js"></script>
+        <script src="/home/s/personal_work/Javascript/Activities/js/react-dom.development.js"></script>
+        <script src="/home/s/personal_work/Javascript/Activities/js/babel.js"></script>
+        <script type="text/babel">
+            let rootHandle = document.getElementById('root')
+            //  class component, it should return jsx
+            // it will have render method, whenever the custructor method is called then render method will get called
+            // whenever setState method is called then it will autometically calls the render method
+            class Counter extends React.Component {
+              constructor(){
+                super()
+                this.state = {
+                  cartItems: [
+                      {id: 1, name: "Writto metter pen", price: 10, count: 30, cod_eligible: "true", hide: "true"},{id: 2,count: 20, name: "hp laptop", price: 25, cod_eligible: "true", hide: "true"},{id: 3, name: "puma shoes", price: 200, count: 10, cod_eligible: "false", hide: "fasle"}
+                  ]
+                }
+              }
+
+              render(){
+                return (
+                  <div>
+                    <table className="table" border="1s">
+                        <thead>
+                            <tr>
+                                <th>Name</th>
+                                <th>Price</th>
+                                <th>Quantity</th>
+                                <th>Total Price</th>
+                                <th> Eligible</th>
+                                <th>Action</th>
+                                <th>Boolean</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {this.state.cartItems.map(function(cart){
+                                return <Product key = {cart.id} name={cart.name} price={cart.price} id={cart.id} count={cart.count} cod_eligible={cart.cod_eligible} hide={cart.hide}/>
+                            })}
+                        </tbody>
+                    </table>
+                  </div>
+                )
+              }
+            }
+
+            class Product extends React.Component {
+              constructor(props){
+                  super(props)
+                  this.state = {
+                      name: props.name,
+                      price: props.price,
+                      id: props.id,
+                      count: props.count,
+                      cod_eligible: props.cod_eligible,
+                      hide: props.hide
+                  }
+              }
+
+              up = () =>{
+                this.setState(prevState => ({
+                  count: prevState.count + 1 
+                }))
+              }
+              
+              down = () =>{
+                this.setState(prevState => ({
+                  count: prevState.count - 1
+                }))
+              }
+
+              changeCod = () => {
+                if(this.state.cod_eligible == "true"){
+                  this.setState(prevState => (
+                    {
+                      cod_eligible: "false",
+                      hide: "false"
+                    }
+                  ))
+                }else if(this.state.cod_eligible == "false"){
+                  this.setState(prevState => (
+                    {
+                      cod_eligible: "true",
+                      hide: "true"
+                    }
+                  ))
+                }
+              }
+              
+              render(){
+                let {hide} = this.state
+                let type = "text"
+                
+                if(hide == "true"){
+                  type = "password"
+                }
+
+                return (
+                  <tr>
+                    <td>{this.state.name}</td>
+                    <td>{this.state.price}</td>
+                    <td>{this.state.count}</td>
+                    <td>{this.state.count * this.state.price}</td>
+                    <td>{this.state.cod_eligible} - <button onClick={this.changeCod}>ChangeCode</button></td>
+                    <td><button onClick = {this.up}>+</button> <button onClick = {this.down}>-</button></td>
+                    <td><input type={type} value = {this.state.hide} readOnly/></td>                    
+                  </tr>
+                )
+              }
+            }
+
+            class BtnClick extends React.Component {
+              constructor(props){
+                super(props)
+                this.state = {
+                  name: "", gender: ""
+                }
+              }              
+
+              addName = (e) => {
+                let name = e.target.value
+                let gender = ""
+                this.setState({name, gender})
+              }
+
+              getGender = (e) => {
+                e.preventDefault()
+                name = this.state.name
+                let url = "https://gender-api.com/get?name=" + name + "&key=AtuqEuWPyABdWYorNr";
+                fetch(url)
+                .then(response => {return response.json()})
+                .then(response => {
+                  this.setState({gender: response.gender[0].toUpperCase() + response.gender.slice(1)})
+                })
+              }
+
+              render(){
+                return(
+                  <div>
+                    <h2>The Gender of the {this.state.name} is :: {this.state.gender}</h2>
+                    <form onSubmit = {this.getGender}>
+                      <input type="text" id = "gender" onChange = {this.addName}/>
+                      <input type="submit" value="Get Gender" />
+                    </form>
+                  </div>
+                )
+              }
+            } 
+
+            class Search extends React.Component {
+              constructor(){
+                super()
+                this.state = {
+                  showResults: true
+                }
+              }
+
+              handleShow = () => {
+                this.setState({showResults: true})
+              }
+
+              handleHide = () => {
+                this.setState({showResults: false})
+              }
+
+              render(){
+                return (
+                  <div>
+                    <br/>
+                    <input type="button" onClick = {this.handleShow} value="show" readOnly/>
+
+                    <input type="button" onClick = {this.handleHide} value="hide" readOnly/>
+
+                    {this.state.showResults ? <Result /> : null}
+                  </div> 
+                )
+              }
+            }
+
+            class Result extends React.Component{
+              render(){
+                return (
+                  <div>Some Results</div>
+                )
+              }
+            }
+
+            const App = (
+              <div><Counter/><BtnClick/><Search/></div>
+            )
+
+            ReactDOM.render(App, rootHandle)
+        </script>
+    </body>
+</html>
+
+
