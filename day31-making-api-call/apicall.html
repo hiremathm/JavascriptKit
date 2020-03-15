@@ -1,0 +1,78 @@
+<!DOCTYPE  html>
+<html>
+  <head>
+  </head>
+  <body>
+    <div id = "root">        
+    </div>
+    <script src="/home/s/personal_work/Javascript/Activities/js/react.development.js"></script>
+    <script src="/home/s/personal_work/Javascript/Activities/js/react-dom.development.js"></script>
+    <script src="/home/s/personal_work/Javascript/Activities/js/babel.js"></script>
+    <script type="text/babel">
+      let rootHandle = document.getElementById('root')
+
+      // 1 Component - User - state = {user: []}
+      // 2 Component - UserData
+
+      class User extends React.Component {
+        constructor(){
+            super()
+            this.state = {
+            users: []
+          }
+        }
+
+        componentDidMount () {
+          const url = "https://jsonplaceholder.typicode.com/users"
+          fetch(url)
+          .then(response => {
+            return response.json()
+          })
+          .then(users => this.setState({users})
+          )
+          .catch(error => {
+            console.log(error)
+          })
+        }
+
+        render(){
+          return (
+            <div>
+              <h2>Listing Users - {this.state.users.length}</h2>
+              <table border="1">
+                <thead>
+                  <tr>
+                    <td>#</td>
+                    <td>Name</td>
+                    <td>Username</td>
+                    <td>Email</td>
+                    <td>Phone</td>
+                    <td>Website</td>
+                  </tr>
+                </thead>
+                <tbody>
+                  {this.state.users.map(user => {return <UserData key = {user.id} user={user}/>})}
+                </tbody>
+              </table>
+            </div>
+          )
+        }
+      }
+
+      const UserData = (props) => {
+        return (
+          <tr>
+            <td>{props.user.id}</td>
+            <td>{props.user.name}</td>
+            <td>{props.user.username}</td>
+            <td>{props.user.email}</td>
+            <td>{props.user.phone}</td>
+            <td>{props.user.website}</td>
+          </tr>
+        )
+      }
+
+      ReactDOM.render(<User/>, rootHandle)
+    </script>
+  </body>
+</html>
