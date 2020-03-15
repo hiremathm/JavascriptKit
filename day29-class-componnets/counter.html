@@ -21,6 +21,7 @@
             // whenever setState method is called then it will autometically calls the render method
             class Counter extends React.Component {
               constructor(){
+                console.log("construcor")
                 super()
                 this.state = {
                     count: 0
@@ -44,6 +45,7 @@
 
 
               render(){
+                console.log("render")
                 return (
                   <div>
                       <h2>
