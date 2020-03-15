@@ -1,0 +1,52 @@
+
+<!DOCTYPE  html>
+<html>
+    <head>
+
+    </head>
+
+    <body>
+        <div id = "root">
+            
+        </div>
+
+
+        <script src="/home/s/personal_work/Javascript/Activities/js/react.development.js"></script>
+        <script src="/home/s/personal_work/Javascript/Activities/js/react-dom.development.js"></script>
+        <script src="/home/s/personal_work/Javascript/Activities/js/babel.js"></script>
+        <script type="text/babel">
+            let rootHandle = document.getElementById('root')
+            //  class component, it should return jsx
+            // it will have render method, whenever the custructor method is called then render method will get called
+            // whenever setState method is called then it will autometically calls the render method
+            class Person extends React.Component {
+              constructor(){
+                super()
+                this.state = {
+                    number: 10
+                }
+
+                setTimeout(() => {
+                  this.setState((prevState)=>({
+                    number: prevState.number + 10
+                  }))
+                }, 1500)
+              }
+
+              render(){
+                return (
+                  <div>
+                      <h2>
+                          My number is  
+                      </h2>
+                      <h3> {this.state.number}</h3>
+                  </div>
+                )
+              }
+            }
+            ReactDOM.render(<Person/>, rootHandle)
+        </script>
+    </body>
+</html>
+
+

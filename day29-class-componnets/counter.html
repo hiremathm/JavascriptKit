@@ -1,0 +1,62 @@
+
+<!DOCTYPE  html>
+<html>
+    <head>
+
+    </head>
+
+    <body>
+        <div id = "root">
+            
+        </div>
+
+
+        <script src="/home/s/personal_work/Javascript/Activities/js/react.development.js"></script>
+        <script src="/home/s/personal_work/Javascript/Activities/js/react-dom.development.js"></script>
+        <script src="/home/s/personal_work/Javascript/Activities/js/babel.js"></script>
+        <script type="text/babel">
+            let rootHandle = document.getElementById('root')
+            //  class component, it should return jsx
+            // it will have render method, whenever the custructor method is called then render method will get called
+            // whenever setState method is called then it will autometically calls the render method
+            class Counter extends React.Component {
+              constructor(){
+                super()
+                this.state = {
+                    count: 0
+                }
+              }
+
+              up = () =>{
+                console.log("up is clicked")
+                this.setState(prevState=>({
+                  count: prevState.count + 1
+                }))
+              }
+
+              
+              down = () =>{
+                console.log("down is clicked")
+                this.setState(prevState=>({
+                  count: prevState.count - 1
+                }))
+              }
+
+
+              render(){
+                return (
+                  <div>
+                      <h2>
+                          My count is {this.state.count}  
+                      </h2>
+                      <button onClick = {this.state.count >=0  && this.up} disabled={this.state.count >= 10 && true}>Up</button> - <button onClick={ this.down} disabled={this.state.count <= 1 && true}>Down</button>
+                  </div>
+                )
+              }
+            }
+            ReactDOM.render(<div><Counter/><Counter/><Counter/></div>, rootHandle)
+        </script>
+    </body>
+</html>
+
+
