@@ -1,0 +1,43 @@
+
+<!DOCTYPE  html>
+<html>
+    <head>
+
+    </head>
+
+    <body>
+        <div id = "root">
+            
+        </div>
+
+
+        <script src="/home/s/personal_work/Javascript/Activities/js/react.development.js"></script>
+        <script src="/home/s/personal_work/Javascript/Activities/js/react-dom.development.js"></script>
+        <script src="/home/s/personal_work/Javascript/Activities/js/babel.js"></script>
+        <script type="text/babel">
+            let rootHandle = document.getElementById('root')
+            const products = [
+              {name: "pen", description: "pin point pen", rating: 5},{name: "mobile", description: "4gb, 32 gb, 5 inch", rating: 4},{name: "laptop",description: "hp , i5, 1 tb, 8 gb", rating: "5"}
+            ]
+            const Product = (props) => {
+              return (
+                <div>
+                    <h3>{props.name} - rating {props.rating}</h3>
+                    <p>{props.description}</p>
+                </div>
+              )
+            }  
+
+            const app = (
+              <div>
+                  {products.map(function(product){
+                    return <Product name= {product.name} description={product.description} rating={product.rating}/>
+                  })}
+              </div>
+            )
+            ReactDOM.render(app, rootHandle)
+        </script>
+    </body>
+</html>
+
+
