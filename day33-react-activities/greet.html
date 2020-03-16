@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Message Component</title>
+</head>
+<body>
+	<div id = "root">
+		
+	</div>
+
+	<script src="/home/s/personal_work/Javascript/Activities/js/react.development.js"></script>
+	<script src="/home/s/personal_work/Javascript/Activities/js/react-dom.development.js"></script>
+	<script src="/home/s/personal_work/Javascript/Activities/js/babel.js"></script>
+	<script type="text/babel">
+		let rootHandle = document.getElementById("root")
+		class Message extends React.Component {
+			render(){
+				return(
+					<div>
+						<h1>
+							{this.props.text}
+						</h1>
+					</div>
+				)
+			}
+		}
+
+		ReactDOM.render(<Message text="Hello World"/>, rootHandle)
+	</script>
+</body>
+</html>

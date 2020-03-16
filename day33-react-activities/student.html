@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title></title>
+</head>
+<body>
+	<div id = "root">
+		
+	</div>
+	<script src="/home/s/personal_work/Javascript/Activities/js/react.development.js"></script>
+	<script src="/home/s/personal_work/Javascript/Activities/js/react-dom.development.js"></script>
+	<script src="/home/s/personal_work/Javascript/Activities/js/babel.js"></script>
+	<script type="text/babel">
+		let rootHandle = document.getElementById("root")
+		class Student extends React.Component {
+			constructor(){
+				super()
+				this.state = {
+					students: [
+						{name: "shiva", id: 1 },{name: "aishu", id: 2}
+					]
+				}
+			}
+
+			render() {
+        return (
+          <div>
+            <ul>
+                {
+                    this.state.students.map(student => {
+                        return <StudentList key ={student.name} name={student.name}/>
+                    })
+                }
+            </ul>
+          </div>
+        )
+      }
+		}
+
+		const StudentList = (props) => {
+			return(				
+				<li>
+					{props.name}
+				</li>
+			)
+		}
+
+		ReactDOM.render(<Student/>, rootHandle)
+	</script>
+</body>
+</html>

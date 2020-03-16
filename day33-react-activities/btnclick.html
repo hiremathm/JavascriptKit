@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title></title>
+</head>
+<body>
+	<div id = "root">
+		
+	</div>
+	<script src="/home/s/personal_work/Javascript/Activities/js/react.development.js"></script>
+	<script src="/home/s/personal_work/Javascript/Activities/js/react-dom.development.js"></script>
+	<script src="/home/s/personal_work/Javascript/Activities/js/babel.js"></script>
+	<script type="text/babel">
+		let rootHandle = document.getElementById("root")
+         
+        class CompoentOne extends React.Component {
+            handleClick = (name) => {
+                alert(name)
+            }
+            render(){
+                return (
+                    <div>
+                        <button onClick = {()=> {this.handleClick("shiva")}}>Click</button>    
+                    </div>
+                )
+            }
+        }
+		ReactDOM.render(<CompoentOne city = "Bangalore" state = "Karnataka"/>, rootHandle)
+	</script>
+</body>
+</html>
