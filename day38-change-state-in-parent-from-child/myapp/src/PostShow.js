@@ -3,11 +3,11 @@ import axios from 'axios'
 
 class PostShow extends React.Component {
     constructor(){
-      super()
-      this.state = {
-          post: {},
-          comments: []
-      }
+        super()
+        this.state = {
+            post: {},
+            comments: []
+        }
     }    
 
     componentDidMount() {
