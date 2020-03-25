@@ -35,7 +35,7 @@ class TicketForm extends React.Component {
         }
       })
       .catch(errors => {
-        console.log("error");
+        console.log(errors);
       });
     }
 

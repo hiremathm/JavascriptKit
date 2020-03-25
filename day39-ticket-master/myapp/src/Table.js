@@ -2,6 +2,25 @@ import React from 'react'
 import TableRow from './TableRow'
 
 class Table extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      tickets: props.tickets
+    }
+    console.log(props)
+
+  }
+  
+  updateRow = (ticket) => {
+    this.props.getUpdatedTicket(ticket,"update")
+  }
+
+  removeRow = (ticket) => {
+    console.log("removed ticket is ", ticket)
+    this.props.getUpdatedTicket(ticket, "remove")
+
+  }
+
   render(){
     return(
       <div>
@@ -19,7 +38,7 @@ class Table extends React.Component {
           </thead>
           <tbody>
             {this.props.tickets.map (ticket => {
-            return <TableRow key={ticket.ticket_code} ticket={ticket}/>})}
+            return <TableRow key={ticket.ticket_code} ticket={ticket} updateRow={this.updateRow} removeRow={this.removeRow}/>})}
           </tbody>
         </table>
       </div>
