@@ -13,6 +13,7 @@ class Table extends React.Component {
   
   updateRow = (ticket) => {
     this.props.getUpdatedTicket(ticket,"update")
+    console.log("updated ticket is ", ticket)
   }
 
   removeRow = (ticket) => {

@@ -24,17 +24,30 @@ class Ticket extends React.Component {
   }
 
   getUpdatedTicket = (ticket, value) => {
-    if(value == "update"){
-      console.log("ticket", ticket)
-      let tickets = this.state.tickets.filter(t => {
-        return (t.id == ticket.id ? t.priority = ticket.priority : t)
+    console.log("value is", value)
+    if(value == "add"){
+      let tickets = this.state.tickets.concat(ticket)
+      this.setState(() => ({
+        tickets: tickets,originalTickets: tickets
+      }))
+    }
+    else if(value == "update"){
+      console.log("ticket to be update", ticket)
+      let tickets = []
+      this.state.tickets.forEach(t => {
+        console.log("ticket id",ticket.id == t.id)
+        if(t.ticket_code == ticket.ticket_code){
+          tickets.push(ticket)
+        } else {
+          tickets.push(t)
+        }  
       })
       this.setState(() => ({
         tickets: tickets,originalTickets: tickets
       }))
     }else if (value == "remove"){
       let tickets = this.state.tickets.filter(t => {
-        return (t.id != ticket.id)
+        return t.ticket_code != ticket.ticket_code
       })
       this.setState(() => ({
         tickets: tickets,originalTickets: tickets

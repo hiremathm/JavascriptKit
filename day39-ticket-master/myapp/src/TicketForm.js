@@ -26,7 +26,7 @@ class TicketForm extends React.Component {
       })
       .then(response => {
         if(!response.data.hasOwnProperty("errors")){
-          this.props.getUpdatedTicket(response.data)
+          this.props.getUpdatedTicket(response.data,"add")
           this.refs.form.reset()
         }else{
           this.setState(() => ({
