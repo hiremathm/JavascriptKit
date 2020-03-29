@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Promises</title>
+    </head>
+
+    <body>
+        <script>
+            function getGender(name){
+                return new Promise(function(resolve, reject){
+                    const xhr = new XMLHttpRequest()
+                    xhr.open('GET',`https://gender-api.com/get?name=${name}&key=AtuqEuWPyABdWYorNr`)
+                    xhr.send()
+                    xhr.onload = function(){
+                        resolve(JSON.parse(xhr.responseText))
+                    }
+                    xhr.onerror = function(){
+                        reject(JSON.parse(response.statusText))
+                    }
+                })
+            }
+            const allPromises = []
+            const names = ['vijay','sujay','reshma']
+            names.forEach(function(name){
+                allPromises.push(getGender(name))
+            })
+
+            Promise.all(allPromises)
+                .then(function(response){
+                    console.log(response)
+                })
+                .catch(function(error){
+                    console.log(error)
+                })
+        </script>
+    </body>
+</html>
