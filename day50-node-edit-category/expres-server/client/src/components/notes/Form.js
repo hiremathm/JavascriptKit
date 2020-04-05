@@ -55,8 +55,9 @@ class Form extends React.Component {
                 <form onSubmit={this.handleSubmit} ref="form">
                     <label>
                         Category : <select name="category" onChange={this.handleChange}>
+                            <option value="">Select Category</option>
                             {this.state.categories.map(category => {
-                            return <option key={category._id} value={category._id}>{category.title}</option>
+                            return <option key={category._id} value={category._id} selected={this.state.category._id == category._id && true }>{category.title}</option>
                             })}                   
                         </select>
                     </label>
@@ -67,7 +68,8 @@ class Form extends React.Component {
                     <br/><br/>
                     <label>
                         Body : <input type="text" name="body" value={this.state.body } onChange={this.handleChange}/>
-                    </label><br/><br/>
+                    </label>
+                    <br/><br/>
                     <label>
                         <input type="Submit" value={this.props.submitvalue ? this.props.submitvalue : "Create Note"} readOnly/>
                         <Link to="/notes"><button>Back</button></Link>
