@@ -17,10 +17,9 @@ router.get('/', (req, res) => {
 // categories show
 router.get('/:id', (req, res) => {
     const id = req.params.id
-    Category.findById(id)
-        .then(categories => {
-            console.log("categories ", categories)
-            res.json(categories)
+    Promise.all([Category.findById(id), Note.find({category: id})])
+        .then(response => {
+            res.json({categories: response[0], notes: response[1]})
         })
         .catch(error => {
             console.log(error)
