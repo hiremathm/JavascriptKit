@@ -1,0 +1,13 @@
+.main-links a {
+    padding: 10px;
+    display: inline-block;
+    text-decoration: none;
+}
+
+.main-links a:hover {
+    color:hotpink;
+}
+
+.post-cards{
+    margin-top: 20px;
+}

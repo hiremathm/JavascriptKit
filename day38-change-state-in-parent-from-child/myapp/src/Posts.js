@@ -19,39 +19,33 @@ class Posts extends React.Component {
 
 	render(){
 		return (
-			<div>
-        <h1>Listing Posts - {this.state.posts.length}</h1>	
-        <table border="1">
-          <thead>
-            <tr>
-              <th>
-              #
-              </th>
-              <th>
-              Title
-              </th>
-              <th>
-              Body
-              </th>
-              <th>
-                User Id
-              </th>
-            </tr>
-          </thead>
-          <tbody>
-            
-              {this.state.posts.map (post => {
-                return <tr>
-                  <td>{post.id}</td>
-                  <td><Link to={`/posts/${post.id}`}>{post.title}</Link></td>
-                  <td>{post.body}</td>
-                  <td>{post.userId}</td>
-                </tr> 
-              })}
-            
-          </tbody>
-        </table>			
-			</div>
+      <div className="container">
+      <div className="row post-cards">
+        {this.state.posts.map(
+          post => {
+            return (
+              <div className="col-md-4">
+                <div className="card">
+                  
+                  <div className="card-body">
+                    <h5 className="card-title">
+                    {post.title}
+                    </h5>
+                    <div className="card-text">
+                      {post.body}
+                    </div>
+                    <br/><br/>
+                    <div>
+                      <Link to={`/posts/${post.id}`}>View</Link>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            )
+          }
+        )}
+      </div>
+      </div>
 		)
 	}
 }
