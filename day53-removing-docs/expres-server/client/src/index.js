@@ -1,7 +1,11 @@
 import React from 'react'
 import ReactDom from 'react-dom'
 import {BrowserRouter, Route, Link,Switch} from 'react-router-dom'
+
+import {Navbar, NavbarBrand, NavbarToggler, Nav, NavItem, NavLink, NavbarText, Button} from 'reactstrap'
+
 import 'bootstrap/dist/css/bootstrap.min.css';
+
 
 // import notes
 import NotesList from './components/notes/NoteList'
@@ -19,16 +23,30 @@ import CategoryEdit from './components/categories/CategoryEdit'
 import User from './components/users/UserList'
 import UserShow from './components/users/UserShow'
 
+
+
 class App extends React.Component {
     render(){
         return (
             <BrowserRouter>
-            <div>
-                <h1>Note React Frontend And Express Backend App</h1>
-                
-                <span><Link to="/notes" exact={true}>Notes</Link></span> {" ".repeat(1)}
-                <span><Link to ="/categories" exact={true}>Categories</Link></span>{" ".repeat(1)}
-                <span><Link to="/users" exact={true} >Users</Link></span>
+                <div>
+                <Navbar color="dark" dark expand="md">
+                    <NavbarBrand href="/">Keep Note <small>(MERN Stack)</small> </NavbarBrand>
+                    <Nav className="mr-auto" navbar>
+                        <NavItem>
+                            <NavLink href="/notes" exact={true}>Notes</NavLink> 
+                        </NavItem> 
+                        <NavItem>
+                            {/* <NavLink href="/categories" exact={true}>Categories</NavLink> */}
+                        </NavItem>
+
+                        <NavItem>
+                            {/* <NavLink href="/users" exact={true}>Users</NavLink> */}
+                        </NavItem>
+                    </Nav>
+                </Navbar>
+                <br/>
+ 
 
                 <Switch>
                     {/* Notes Routes */}
@@ -53,5 +71,6 @@ class App extends React.Component {
         )
     }
 }
+
 
 ReactDom.render(<App/>, document.getElementById('root'))

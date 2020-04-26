@@ -64,7 +64,8 @@ const Note = require("../models/note")
 // module.exports = router
 
 module.exports.notes = function(req,res){
-    Note.find().populate('category')
+    const user = req.user
+    Note.find({user: user._id}).sort({title: 'desc'}).populate('category').populate('user').populate('tags.tag', ['name'])
         .then((notes) => {
             res.json(notes)
         })
@@ -75,7 +76,9 @@ module.exports.notes = function(req,res){
 
 module.exports.create = function(req,res){
     const body = req.body
+    const user = req.user
     const note = new Note(body)
+    note.user = user._id
     note.save()
         .then((note) => {
             res.json(note)
@@ -87,9 +90,15 @@ module.exports.create = function(req,res){
 
 module.exports.show = function(req,res){
     const id = req.params.id
-    Note.findById(id).populate('category').populate('user').populate('tags.tag',['name'])
+    console.log("request")
+    // Note.findById(id).populate('category').populate('user').populate('tags.tag',['name'])
+    Note.findOne({ user: req.user._id,_id: id}).populate('category').populate('user').populate('tags.tag',['name'])
         .then((note) => {
-            res.json(note)
+            console.log("note is ", note)
+            if(note){
+                res.json(note)
+            }
+            res.json({})
         })
         .catch((error) => {
             res.json(error)
@@ -139,7 +148,7 @@ module.exports.removeTag = function(req, res){
 module.exports.update = function(req,res){
     const id = req.params.id
     const body = req.body
-    Note.findByIdAndUpdate(id,{$set: body},{new: true, runValidators: true})
+    Note.findOneAndUpdate({_id: id, user: req.user._id},{$set: body},{new: true, runValidators: true})
         .then((note) => {
             res.json(note)
         })

@@ -1,5 +1,7 @@
 const User = require('../models/user')
 const Note = require('../models/note')
+const jwt = require('jsonwebtoken')
+
 module.exports.users = (req, res) => {
     User.find()
         .then(users => {
@@ -19,6 +21,74 @@ module.exports.create = (req,res) => {
         })
         .catch(error=> {
             res.json(error)
+        })
+}
+
+module.exports.login = (req, res) => {
+    const body = req.body
+    User.findByCredentials(body)
+        .then(user => {
+            return user.generateToken()
+        })
+        .then(token => {
+            console.log("token is ", token)
+            res.send({token})
+            // res.setHeader('x-auth', token).send()
+        })
+        .catch(error => {
+            res.send(error)
+        })
+
+    // User.findOne({email: body.email})
+    //     .then(user => {
+    //         if(!user){
+    //             res.status('404').send({message: "Invalid Email / Password"})
+    //         }
+
+    //         bcryptjs.compare(body.password,user.password)
+    //             .then(function(result){
+    //                 if(result){
+    //                     res.send({message: "User successfully logged in"})
+    //                 }else{
+    //                     res.send({message: "Invalid Email / Password"})
+    //                 }
+    //             })
+    //             .catch(function(error){
+    //                 res.send(error)
+    //             })
+    //     })
+    //     .catch(error => {
+    //         res.json(error)
+    //     })
+}
+
+module.exports.account = (req, res) =>{
+    const {user} = req
+    res.send(user)
+    // const token = req.header('x-auth')
+    // if(token){
+    //     User.findByToken(token)
+    //         .then(user => {
+    //             res.send(user)
+    //         })
+    //         .catch(error => {
+    //             res.status('401').send(error)
+    //         })
+    // }
+    // else{
+    //     res.status('401').send({message: "Unauthorized user"})
+    // }
+}
+
+module.exports.logout = (req, res) => {
+    const { user , token}= req
+    console.log('user is', user)
+    User.findByIdAndUpdate(user._id, {$pull: {tokens: {token: token}}})
+        .then(user => {
+            res.send({message:"Successfully Logged Out"})
+        })
+        .catch(error => {
+            res.send(error)
         })
 }
 
