@@ -15,7 +15,7 @@ class NewNote extends React.Component {
             method: 'post',
             url: url,
             data: formData,
-            headers: {"x-auth": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI1ZWE0MjQxNWJiM2Q2NDZhOTMxOGU3NWUiLCJuYW1lIjoic293bXlhIiwiZW1haWwiOiJzb3dteWFAZ21haWwuY29tIiwicGFzc3dvcmQiOiIkMmEkMTAkSTlsZlBQNENjblVONDdWeTFMU1ZJLmxzVW1YbDAyRFUwSEc0aTBveVp0enRHa1hxaWtnbWUiLCJpYXQiOjE1ODc4NjQyNDh9.X2hz4hYiWVkcrbxsFondxjUX9CrcZ3vOhoe0VoAP474"}
+            headers: {"x-auth": localStorage.getItem('userAuthToken')}
         })
         .then(response => {
             console.log("response", response)

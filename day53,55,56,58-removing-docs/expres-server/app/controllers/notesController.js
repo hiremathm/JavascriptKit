@@ -90,15 +90,13 @@ module.exports.create = function(req,res){
 
 module.exports.show = function(req,res){
     const id = req.params.id
-    console.log("request")
     // Note.findById(id).populate('category').populate('user').populate('tags.tag',['name'])
     Note.findOne({ user: req.user._id,_id: id}).populate('category').populate('user').populate('tags.tag',['name'])
         .then((note) => {
-            console.log("note is ", note)
-            if(note){
-                res.json(note)
+            if(!note){
+                res.json({})
             }
-            res.json({})
+            res.json(note)
         })
         .catch((error) => {
             res.json(error)

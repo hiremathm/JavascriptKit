@@ -64,6 +64,8 @@ module.exports.login = (req, res) => {
 
 module.exports.account = (req, res) =>{
     const {user} = req
+    
+
     res.send(user)
     // const token = req.header('x-auth')
     // if(token){
@@ -81,8 +83,7 @@ module.exports.account = (req, res) =>{
 }
 
 module.exports.logout = (req, res) => {
-    const { user , token}= req
-    console.log('user is', user)
+    const { user , token}= req       
     User.findByIdAndUpdate(user._id, {$pull: {tokens: {token: token}}})
         .then(user => {
             res.send({message:"Successfully Logged Out"})

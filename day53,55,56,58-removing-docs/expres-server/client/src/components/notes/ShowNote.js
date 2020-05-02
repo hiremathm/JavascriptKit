@@ -15,7 +15,7 @@ class ShowNote extends React.Component {
     componentDidMount = () => {
         const id = this.props.match.params.id
         console.log("id is ", id)
-        axios.get(`http://localhost:3002/notes/${id}`,{headers: {"x-auth": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI1ZWE0MjQxNWJiM2Q2NDZhOTMxOGU3NWUiLCJuYW1lIjoic293bXlhIiwiZW1haWwiOiJzb3dteWFAZ21haWwuY29tIiwicGFzc3dvcmQiOiIkMmEkMTAkSTlsZlBQNENjblVONDdWeTFMU1ZJLmxzVW1YbDAyRFUwSEc0aTBveVp0enRHa1hxaWtnbWUiLCJpYXQiOjE1ODc4NjQyNDh9.X2hz4hYiWVkcrbxsFondxjUX9CrcZ3vOhoe0VoAP474"}})
+        axios.get(`http://localhost:3002/notes/${id}`,{"headers":{"x-auth": localStorage.getItem('userAuthToken')}})
             .then(response => {
                 console.log("response", response)
                 this.setState({note: response.data})
@@ -27,7 +27,7 @@ class ShowNote extends React.Component {
 
     handleRemove = () => {
         const id = this.props.match.params.id
-        axios.delete(`http://localhost:3002/notes/${id}`)
+        axios.delete(`http://localhost:3002/notes/${id}`,{"headers":{"x-auth": localStorage.getItem('userAuthToken')}})
             .then(response => {
                 this.props.history.push(`/notes`)
                 // this.setState({note: response.data})
@@ -40,7 +40,7 @@ class ShowNote extends React.Component {
     removeTag = (tagId) => {
         console.log('removed tag ', tagId)
         const noteId = this.state.note._id
-        axios.delete(`http://localhost:3002/notes/removeTag?noteId=${noteId}&tagId=${tagId}`)
+        axios.delete(`http://localhost:3002/notes/removeTag?noteId=${noteId}&tagId=${tagId}`,{"headers":{"x-auth": localStorage.getItem('userAuthToken')}})
             .then(response => {
                 // if(response.data.hasOwnProperty('errors')){
                     this.setState({note: response.data})

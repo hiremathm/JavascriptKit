@@ -94,19 +94,20 @@ class Form extends React.Component {
     }
     
     componentWillReceiveProps = (nextProps) => {
-        console.log("nextprops tags",nextProps.note.tags)
-        this.setState(() => ({
-            title: nextProps.note.title,
-            body: nextProps.note.body,
-            category: nextProps.note.category,
-            user: nextProps.note.user,
-            selectedTags: nextProps.note.tags.map(tag =>{
-                return {_id: tag.tag._id, name: tag.tag.name}
-            }
+        console.log("nextprops",nextProps)
+        if(nextProps.note != undefined){
+            this.setState(() => ({
+                    title: nextProps.note.title,
+                    body: nextProps.note.body,
+                    category: nextProps.note.category,
+                    user: nextProps.note.user,
+                    selectedTags: nextProps.note.tags.map(tag =>{
+                        return {_id: tag.tag._id, name: tag.tag.name}
+                    }
+                    )
+                })
             )
-            
-        })
-        )
+        }
         console.log("hello shiva", this.state.selectedTags) 
 
         axios.get('http://localhost:3002/tags')
@@ -152,7 +153,7 @@ class Form extends React.Component {
 
                     <label>
                         Tags : 
-                            {this.state.tags.map(tag => {
+                            {this.state.tags && this.state.tags.map(tag => {
                                 return <label key = {tag._id}><input type="checkbox" value={`${tag._id}|${tag.name}`} onChange = {this.handleTagSelection
                             } checked={this.state.selectedTags.findIndex(v => v._id === tag._id) >= 0 ? tag._id : ''}/>{tag.name}</label> 
                             })}

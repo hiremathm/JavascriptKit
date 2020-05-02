@@ -88,11 +88,11 @@ UserSchema.statics.findByToken = function(token){
     }
 
     return User.findOne({'_id': tokenData._id,'tokens.token': token})
-               .then(user => {                   
+               .then(user => {   
                     return Promise.resolve(user)
                })
                .catch(error => {
-                   return Promise.reject({error: "No User Found"})
+                   return Promise.reject({errors: "No User Found"})
                })
 }
 
@@ -101,7 +101,7 @@ UserSchema.statics.findByCredentials = function(body){
     return User.findOne({email: body.email})
         .then(function(user){
             if(!user){
-                return Promise.reject({"message": "Invalid Email / Password"})
+                return Promise.reject({"errors": "Invalid Email / Password"})
             }
             
             return bcryptjs.compare(body.password, user.password)
@@ -109,7 +109,7 @@ UserSchema.statics.findByCredentials = function(body){
                         if(result){
                             return Promise.resolve(user)
                         }else{
-                            return Promise.reject({message: "Invalid Email / Password "})
+                            return Promise.reject({errors: "Invalid Email / Password "})
                         }
                     })
         })

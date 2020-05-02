@@ -16,12 +16,13 @@ class UserShow extends React.Component {
                 console.log("user response", response)
                 this.setState({user: response.data.user, notes: response.data.notes})
             })
-        // Axios.get(`http://localhost:3002/notes`)
-        //     .then(response => {
-        //         this.setState({
-        //             notes: response.data
-        //         })
-        //     })
+        
+            Axios.get(`http://localhost:3002/notes`)
+            .then(response => {
+                this.setState({
+                    notes: response.data
+                })
+            })
     } 
 
     render(){

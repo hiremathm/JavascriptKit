@@ -19,12 +19,13 @@ Router.delete('/notes/:id',authenticateUser ,notesController.delete)
 // Users Routes
 Router.get('/users', usersController.users)
 Router.post('/users', usersController.create)
-Router.get('/users/:id', usersController.show)
-Router.put('/users/:id', usersController.update)
-Router.delete('/users/logout', authenticateUser, usersController.logout)
-Router.delete('/users/:id', usersController.delete)
-Router.post('/users/login', usersController.login)
 Router.post('/users/account',authenticateUser, usersController.account)
+Router.get('/users/:id', authenticateUser,usersController.show)
+Router.put('/users/:id', authenticateUser,usersController.update)
+Router.delete('/users/logout', authenticateUser, usersController.logout)
+Router.delete('/users/:id', authenticateUser, usersController.delete)
+Router.post('/users/login', usersController.login)
+
 
 
 module.exports = Router
