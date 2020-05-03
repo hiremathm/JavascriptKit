@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Message Component</title>
+</head>
+<body>
+	<div id = "root">
+		
+	</div>
+
+	<script src="/home/s/personal_work/Javascript/Activities/js/react.development.js"></script>
+	<script src="/home/s/personal_work/Javascript/Activities/js/react-dom.development.js"></script>
+    <script src="https://unpkg.com/redux@4.0.5/dist/redux.js"></script>
+
+    <script src="/home/s/personal_work/Javascript/Activities/js/babel.js"></script>
+    <script type="text/babel">
+        let rootHandle = document.getElementById("root")
+        
+        const { createStore } = Redux
+        
+        const reducer = (state = {count: 0}, action) => {
+            switch(action.type){
+                case 'INCREMENT' : {
+                    return {
+                        count: state.count + 1
+                    }
+                }
+                case 'DECREMENT' : {
+                    return {
+                        count: state.count - 1
+                    }
+                }
+                case 'RESET' : {
+                    return {
+                        count: 0
+                    }
+                }
+                case 'INCREMENT_BY' : {
+                    return {
+                        count: state.count + action.payload
+                    }
+                }
+                case 'DECREMENT_BY' : {
+                    return {
+                        count: state.count - action.payload
+                    }
+                }
+                default : {
+                    return {
+                        count: state.count
+                    }
+                }
+            }
+        }
+
+        const store = createStore(reducer)
+
+        store.subscribe( () => {
+            ReactDOM.render(<div><Counter/></div>, rootHandle)
+            console.log(store.getState())
+        })
+
+        const increment = () => {
+            return {type: 'INCREMENT'}
+        }
+
+        const decrement = () => {
+            return {type: 'DECREMENT'}
+        }
+
+        const increment_by = () => {
+            return {type: 'INCREMENT_BY', payload: 1}
+        }
+
+        const decrement_by = () => {
+            return {type: 'DECREMENT_BY', payload: 1}
+        }
+        
+        class Counter extends React.Component {
+            constructor(){
+                console.log("construcor")
+                super()
+            }
+
+            render(){
+                console.log("render")
+                return (
+                    <div>
+                        <h2>
+                            My count is {store.getState().count}  
+                        </h2>
+                        <Component1/>
+                    </div>
+                )
+            }
+        }
+
+        const Component1 = () => {
+            return(
+                <div>
+                    {/*<p>Component 1 rendering Component 2</p>*/}
+                    <Component2/>
+                </div>
+            )
+        }
+
+        const Component2 = () => {
+            return(
+                <div>
+                    {/*<p>component 2 rendering component 3</p>*/}    
+                    <Component3/>
+                </div>
+            )
+        }
+
+        const Component3 = () => {
+            return(
+                <div>
+                    {/*<p>component 3</p>*/}
+                    <button onClick = {() => {
+                        store.dispatch(increment())
+                    }} >Up</button>   
+                    <button onClick = {() => {
+                        store.dispatch(decrement())
+                    }} disabled={store.getState().count <= 1 && true}>Down</button>    
+                </div>
+            )
+        }
+
+        ReactDOM.render(<div><Counter/></div>, rootHandle)
+
+    </script>
+</body>
+</html>
